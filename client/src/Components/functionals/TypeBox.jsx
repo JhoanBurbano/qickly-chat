@@ -10,14 +10,22 @@ const TypeBox = () => {
   const [msg, setmsg] = useState()
   const handleClick = async ()=>{
     NEW_MESSAGE({conversationId:id, text: msg, sender:_id})
+    value=""
+    setmsg("")
   }
   return (
     <Container>
+      {
+        id?
       <Grid container direction="row" justifyContent="center" alignItems="center" >
         <TextField id="filled-basic" onChange={({target:{value}})=>{setmsg(value)}} label="Type you message..." variant="filled" sx={{width:'80%'}} value={msg}/>
         <Button onClick={handleClick} variant="contained" endIcon={<SendIcon sx={{ marginLeft: 0, height: '40px' }} />}>
         </Button>
       </Grid>
+      :
+      <span></span>
+
+      }
     </Container>
   );
 };

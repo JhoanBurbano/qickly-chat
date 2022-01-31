@@ -4,7 +4,7 @@ const intialState = {
 	users: [],
 	conversations: [],
 	chat: {
-		data: [],
+		chats: [],
 		friend: {},
 		id: ''
 	}
@@ -51,11 +51,20 @@ function rootReducer(state = intialState, action) {
 				users: [],
 				conversations: [],
 				chat: {
-					data: [],
+					chats: [],
 					friend: {},
 					id: ''
 				}
 			};
+		case 'PUSHCHAT':
+			return{
+				...state,
+				chat: {
+					...state.chat,
+					chats: [...chats, action.payload]
+				},
+
+			}
 		default:
 			return state;
 	}

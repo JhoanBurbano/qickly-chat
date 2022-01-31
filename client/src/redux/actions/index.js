@@ -82,7 +82,12 @@ export const NEW_MESSAGE = async (body)=>{
 
 export const CLEAR = ()=>{
     delete_cookie("userToken");
-	return async (dispatch)=>{
+	return  (dispatch)=>{
 		return dispatch({type:'CLEAR'})
 	}
 }
+
+export const PUSHCHAT = (msg)=>({
+	type:'PUSHCHAT',
+	payload: msg
+})

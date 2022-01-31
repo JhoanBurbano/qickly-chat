@@ -19,6 +19,7 @@
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
     "sfcookies": "^1.0.2",
+    "socket.io-client": "^4.4.1",
     "styled-components": "^5.3.3",
     "timeago.js": "^4.0.2"
   },

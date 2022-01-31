@@ -15,7 +15,7 @@ export default function MessagesList({conversations}) {
           const [friend] = users.filter(u=>e.members.includes(u._id))
           console.log('este es friend:', friend)
           return(
-            <MessageItem id={e._id} friend={{id:friend._id, username:friend.username, profile:('images/' + (i+1) + '.jpg')}} key={friend._id} name={friend.username} message={e.message.text} date={e.message.createdAt} profile={'images/' + (i+1) + '.jpg'}/>
+            <MessageItem id={e?._id} friend={{id:friend?._id, username:friend?.username, profile:('images/' + (i+1) + '.jpg')}} key={friend?._id} name={friend?.username} message={e.message?.text} date={e.message?.createdAt} profile={'images/' + (i+1) + '.jpg'}/>
         )
         })
       }

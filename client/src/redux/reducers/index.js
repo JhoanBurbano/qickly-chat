@@ -57,14 +57,18 @@ function rootReducer(state = intialState, action) {
 				}
 			};
 		case 'PUSHCHAT':
-			return{
+			return {
 				...state,
 				chat: {
 					...state.chat,
-					chats: [...state.chat.chats, action.payload]
-				},
-
-			}
+					chats: [ ...state.chat.chats, action.payload ]
+				}
+			};
+		case 'GETMYUSER':
+			return {
+				...state,
+				user: action.payload
+			};
 		default:
 			return state;
 	}

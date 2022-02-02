@@ -34,6 +34,17 @@ export const REGISTER = (form, navigate) => {
 	};
 };
 
+export const GETMYUSER = ()=>{
+	return async (dispatch)=>{
+		try {
+			const {data} =  await axios(`${import.meta.env.VITE_DOMAIN}users/?myuser=true`, {headers:{token: read_cookie('userToken')}})
+			return dispatch({type:'GETMYUSER', payload: data})
+		} catch (error) {
+			console.error(error)
+		}
+	}
+}
+
 export const USERS_ALL = () => {
 	return async (dispatch) => {
 		try {

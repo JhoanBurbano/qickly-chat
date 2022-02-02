@@ -12,10 +12,14 @@ import { io } from 'socket.io-client'
 export default function Messenger({visible}) {
     const socket = useRef()
     const dispatch = useDispatch()
-    const { conversations, user, chat } = useSelector(state => state)
+    const { conversations, user, chat, chat:{chats} } = useSelector(state => state)
     const [arrived, setarrived] = useState({})
     useEffect(()=>{
-        socket.current = io(`ws://localhost:8900/`)
+        socket.current = io(import.meta.env.VITE_DOMAIN)
+        
+    }, [visible])
+
+    useEffect(()=>{
         socket.current.on("getMessage", data=>{
             setarrived({
                 sender: data.senderId,
@@ -23,7 +27,7 @@ export default function Messenger({visible}) {
                 createdAt: Date.now()
             })
         })
-    }, [visible])
+    }, [chats])
 
     useEffect(()=>{
         arrived && chat?conversations?.[conversations.indexOf(chat.id)]?.members.includes(arrived.senderId) : false && dispatch( PUSHCHAT(arrived) )

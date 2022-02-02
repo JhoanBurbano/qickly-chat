@@ -24,10 +24,56 @@ server.use(morgan("dev"))
 
 
 server.use('/', routes);
-
-
-
 server.set('port', process.env.PORT || 3001);
-server.listen(server.get('port'), () => console.log(`I'm in http://localhost:${server.get('port')}`));
 
+//SOCKET
+const http = require("http");
+const ServerHTTP = http.createServer(server);
+const { Server } = require("socket.io");
+
+const io = new Server(ServerHTTP, {
+    cors: {
+      origin: "http://localhost:3000",
+    },
+  });
+
+  let users = []
+
+const addUsers = (userId, socketId)=>{
+    !users.some((user)=>user?.userId===userId) && users.push({userId, socketId})
+} 
+
+const removeUser = (socketId) =>{
+    users = users.filter(user => user.socketId!==socketId)                                                                                                                                                                                                                                                                                                            
+}
+
+const getUser = (userId) =>{
+    console.log(users.find(user=>user.userId === userId))
+   return users.find(user=>user.userId === userId)
+}
+
+io.on("connection", (socket)=>{
+    console.log("a user conected.")
+    socket.on("addUser", (userId)=>{
+        addUsers(userId, socket.id)
+        io.emit("getUsers", users)
+    })
+
+
+    socket.on("sendMessage", ({senderId, receiverId, text})=>{
+        const user = getUser(senderId)
+        io.to(user.socketId).emit("getMessage", {
+            senderId,
+            receiverId,
+            text
+        })
+    })
+
+    socket.on('disconnect', ()=>{
+        console.log('a user disconnected!')
+        removeUser(socket.id)
+    })
+})
+
+ServerHTTP.listen(server.get('port'), () => console.log(`I'm in http://localhost:${server.get('port')}`));
 

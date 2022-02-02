@@ -13,9 +13,9 @@ export default function Chat() {
     const { chat: { friend , chats } } = useSelector(state => state)
 
     return (
-        <List sx={{ width: '100%', maxWidth: 600, zIndex: 0 }}>
+        <List sx={{ width: '100%', maxWidth: 600, zIndex: 0, overFlowY: 'scroll' }}>
             {
-                chats?
+                chats.length?
                 (
                     <>
                     <ListItem alignItems="center">

@@ -10,15 +10,25 @@ const Message = ({ name, message, profile, date, type }) => {
     switch (type) {
         case "own":
             return (
-                <ListItem alignItems="flex-start" sx={{flexDirection: 'row-reverse', textAlign: 'right', marginBottom: 1}}
+                <ListItem alignItems="flex-start" sx={{ flexDirection: 'row-reverse', textAlign: 'right', marginBottom: 1 }}
                 >
-                    <ListItemAvatar sx={{marginRight: 0, marginLeft: 2}}>
+                    <ListItemAvatar sx={{ marginRight: 0, marginLeft: 2 }}>
                         <Avatar alt={name} src={import.meta.env.VITE_DOMAIN + profile} />
                     </ListItemAvatar>
                     <ListItemText
                         primary={message}
                         secondary={
                             <>
+
+                                <Typography
+                                    sx={{ display: 'inline', marginRight: 2, fontWeight: 'bold' }}
+                                    component="span"
+                                    variant="subtitle2"
+                                    color="text.primary"
+                                >
+                                    {name}
+                                </Typography>
+
                                 <Typography
                                     sx={{ display: 'inline' }}
                                     component="span"
@@ -34,7 +44,7 @@ const Message = ({ name, message, profile, date, type }) => {
             )
         case "friend":
             return (
-                <ListItem alignItems="flex-start" sx={{bgcolor: "#00666622", borderRadius: 2, marginBottom: 1}}>
+                <ListItem alignItems="flex-start" sx={{ bgcolor: "#00666622", borderRadius: 2, marginBottom: 1 }}>
                     <ListItemAvatar>
                         <Avatar alt={name} src={import.meta.env.VITE_DOMAIN + profile} />
                     </ListItemAvatar>
@@ -42,7 +52,7 @@ const Message = ({ name, message, profile, date, type }) => {
                         primary={message}
                         secondary={
                             <>
-                                
+
                                 <Typography
                                     sx={{ display: 'inline', marginRight: 2, fontWeight: 'bold' }}
                                     component="span"

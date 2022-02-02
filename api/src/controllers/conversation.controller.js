@@ -8,7 +8,8 @@ const newConversation = async (req, res, next) => {
 	const { receiverId } = req.body;
 	try {
 		const { id } = jwt.verify(token, process.env.SECRET_KEY);
-		const existConversation = await conversationModel.find({members: { $in:[id], $in:[receiverId] }})
+		let existConversation = await conversationModel.find({members: { $in:[id]}})
+		existConversation = existConversation.filter(e=>e.members.some(p=>p === receiverId))
 		if(existConversation.length) return res.status(200).json(existConversation);
 		const newConversation = new conversationModel({
 			members: [ id, receiverId ]

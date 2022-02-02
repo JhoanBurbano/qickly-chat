@@ -1,5 +1,5 @@
 const express = require('express')
-// const morgan = require('morgan')
+const morgan = require('morgan')
 const helmet = require('helmet')
 const cors = require('cors')
 const path = require('path')
@@ -20,7 +20,7 @@ server.use("/images", express.static(path.join(__dirname, "public/images")))
 server.use(cors())
 server.use(express.json())
 server.use(helmet())
-// server.use(morgan("dev"))
+server.use(morgan("dev"))
 
 
 server.use('/', routes);

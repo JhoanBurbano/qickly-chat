@@ -33,6 +33,14 @@ export default function Messenger({visible}) {
                 createdAt: Date.now()
             })
         })
+
+        socket.current.on('myMessage', data=>{
+            dispatch( PUSHCHAT({
+                sender: data.senderId,
+                text: data.text,
+                createdAt: Date.now()
+            }) )
+        })
     }, [socket])
 
     useEffect(()=>{

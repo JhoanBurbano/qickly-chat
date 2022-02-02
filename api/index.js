@@ -62,6 +62,7 @@ io.on("connection", (socket)=>{
 
     socket.on("sendMessage", ({senderId, receiverId, text})=>{
         const user = getUser(receiverId)
+        const me = getUser(senderId)
         console.log(senderId, receiverId, text)
         if (user){
             io.to(user.socketId).emit("getMessage", {
@@ -70,6 +71,11 @@ io.on("connection", (socket)=>{
                 text
             })
         }
+        io.to(me.socketId).emit('myMessage',{
+            senderId,
+            receiverId,
+            text
+        })
     })
 
     socket.on('disconnect', ()=>{

@@ -33,7 +33,7 @@ const { Server } = require("socket.io");
 
 const io = new Server(ServerHTTP, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: process.env.FRONT_DOMAIN,
     },
   });
 

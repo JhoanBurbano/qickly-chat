@@ -48,7 +48,6 @@ const removeUser = (socketId) =>{
 }
 
 const getUser = (userId) =>{
-    console.log(users.find(user=>user.userId === userId))
    return users.find(user=>user.userId === userId)
 }
 
@@ -61,7 +60,8 @@ io.on("connection", (socket)=>{
 
 
     socket.on("sendMessage", ({senderId, receiverId, text})=>{
-        const user = getUser(senderId)
+        const user = getUser(receiverId)
+        console.log('un mensajito', user.socketId)
         io.to(user.socketId).emit("getMessage", {
             senderId,
             receiverId,

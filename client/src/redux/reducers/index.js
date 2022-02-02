@@ -61,7 +61,7 @@ function rootReducer(state = intialState, action) {
 				...state,
 				chat: {
 					...state.chat,
-					chats: [...chats, action.payload]
+					chats: [...state.chat.chats, action.payload]
 				},
 
 			}

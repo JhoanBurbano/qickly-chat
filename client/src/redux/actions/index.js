@@ -72,8 +72,8 @@ export const CHAT = (conversationId, friend)=>{
 export const NEW_MESSAGE = async (body)=>{
 	
 	try {
-		const  { data } = await axios.post(`${import.meta.env.VITE_DOMAIN}message/`, body, {headers:{token: read_cookie('userToken')}})
-		return alert(data)
+		 await axios.post(`${import.meta.env.VITE_DOMAIN}message/`, body, {headers:{token: read_cookie('userToken')}})
+		return;
 	} catch (error) {
 		console.error(error)
 		alert('error')

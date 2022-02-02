@@ -13,7 +13,7 @@ export default function Chat() {
     const { chat: { friend , chats } } = useSelector(state => state)
 
     return (
-        <List sx={{ width: '100%', maxWidth: 600, zIndex: 0, overFlowY: 'scroll' }}>
+        <List sx={{ width: '100%', maxWidth: 600, zIndex: 0}}>
             {
                 chats.length?
                 (
@@ -33,7 +33,7 @@ export default function Chat() {
                     </ListItem>
                     <Divider variant="inset" component="li" />
 
-            <Container sx={{ marginTop: 2, height: '400px' }}>
+            <Container sx={{ marginTop: 2, height: '400px', overflow: "auto" }}>
             {
                 chats?.map(e => (
                     <Message
@@ -50,7 +50,7 @@ export default function Chat() {
                 </>
                 )
                 :
-                <Container sx={{height: '400px'}}>
+                <Container sx={{height: '500px'}}>
                     <p>
                         No hay chats por mostrar
                     </p>

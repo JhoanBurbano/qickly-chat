@@ -6,7 +6,7 @@ import { NEW_MESSAGE } from "../../redux/actions";
 import { useSelector } from "react-redux"
 
 const TypeBox = ({socket}) => {
-  const {chat:{id, friend}, user:_id} = useSelector(state=>state)
+  const {chat:{id, friend}, user:{_id}} = useSelector(state=>state)
   const [msg, setmsg] = useState()
   const handleClick =  ({target:{value}})=>{
     
@@ -21,7 +21,7 @@ const TypeBox = ({socket}) => {
     setmsg("")
   }
   return (
-    <Container>
+    <Container sx={{ bgcolor: "#fff"}}>
       {
         id?
       <Grid container direction="row" justifyContent="center" alignItems="center" >

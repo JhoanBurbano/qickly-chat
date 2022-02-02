@@ -21,17 +21,23 @@ export default function Messenger({visible}) {
 
     useEffect(()=>{
         socket.current.on("getMessage", data=>{
+            console.log('esta es data', data)
+            dispatch( PUSHCHAT({
+                sender: data.senderId,
+                text: data.text,
+                createdAt: Date.now()
+            }) )
             setarrived({
                 sender: data.senderId,
                 text: data.text,
                 createdAt: Date.now()
             })
         })
-    }, [chats])
+    }, [socket])
 
     useEffect(()=>{
         arrived && chat?conversations?.[conversations.indexOf(chat.id)]?.members.includes(arrived.senderId) : false && dispatch( PUSHCHAT(arrived) )
-    }, [arrived, chat])
+    }, [arrived])
 
     useEffect(() => {
         socket.current.emit("addUser", user._id);

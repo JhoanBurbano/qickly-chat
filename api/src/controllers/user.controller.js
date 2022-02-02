@@ -45,6 +45,12 @@ const userDelete = async (req, res) => {
 const userGet = async (req, res) => {
     const {userId, username} = req.query;
     try {
+      if(req.query.myuser==='true'){
+        const {token} = req.headers
+        const {id} = jwt.verify(token, process.env.SECRET_KEY)
+        const myuser = await userModel.findById(id)
+        return res.json(myuser)
+      }
       if(!userId && !username){
         const {id} = jwt.verify(req.headers.token, process.env.SECRET_KEY)
         const users = await userModel.find({_id:{$ne:id}}, {password:0, updatedAt:0})
